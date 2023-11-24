@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+        {# pour reprendre le contenu existant dans la base et y rajouter  #}
+        {# {{ parent()}} page index #}
+    page index
+
+{% endblock %}
+{% block body %}
+        <div class="row">
+            <div class="col p-3">
+                <h3>Home page</h3>
+            </div>
+        </div>
+
+    {% for notice in app.flashes('notice') %}
+        <div class="alert alert-success" role="alert">{{ notice }}</div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="col">
+            {# <pre>  {{ dump(my_array) }}  </pre> #}
+            <p>
+                {{ my_array | join(' / ')}}
+            </p>
+            <ul>
+                {% for value in my_array %}
+                    <li>
+                        {{value}}
+                    </li>
+                {% endfor %}
+            </ul>
+            <p><img src=" {{ asset('img/image.png') }} " width='200' ></p> 
+            <ol>
+                {% for key , value in assoc_array %}
+                    <li>
+                    {{key ~ ' : ' ~ value}}
+                    </li>
+                {% endfor %}
+            </ol>
+            <p> {{ now | date('d/m/Y H:i:s ')  }} </p>
+            <a href ="{{ url('homepage.hello' , {name : 'hello' } ) }}"> hello </a>
+        </div>
+    </div>
+{% endblock %}
+

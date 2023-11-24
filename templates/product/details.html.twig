@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <h3>Details of the product N° {{ product.id }} </h3>
+        </div>
+    </div>
+    <div class="row">
+         <div class="col-3">
+            <div class="card">
+                <img src=" {{ asset('img/' ~ product.image)}} " alt="product" class="card-img-top">
+            </div> 
+               <div class="card-body">
+                    <h5 class="card-title">{{ product.designation }} </h5>
+                    
+                    <p> {{ product.description }} </p>
+
+                    <p> Price :  
+                        {{ product.price 
+                            | format_currency('EUR' , locale ='fr') 
+                            | replace({',00': ''})
+                        }} 
+                    </p>
+                    <p> Quantity :  {{ product.quantity == 0 ? 'unavailable product' : 'Quantity : ' ~  product.quantity }} </p>
+                    <p>
+                        <a href=" {{ url('product.index' ) }} " class ="btn btn-primary" >Product List</a>
+                    </p>
+                </div>   
+        </div>   
+    </div>
+{% endblock %}
+

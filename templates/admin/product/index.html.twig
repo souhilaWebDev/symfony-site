@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProductController!{% endblock %}
+
+{% block body %}
+        <div class="row">
+            <div class="col p-3">
+                <h3>Product Managment</h3>
+                <p>
+                  <a href=" {{ url('admin.product.form' ) }} " class ="btn btn-primary" >Add</a>
+                </p>
+                {# meesage de confirmation stocker en session : message flash #}
+                  {# pour afficher le contenu du tableau flashes #}
+                  {#<pre>{{ dump(app.flashes('notice')) }}</pre> #}
+                {% for notice in app.flashes('notice') %}
+                  <div class="alert alert-success" role="alert">{{ notice }}</div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Image</th>
+              <th scope="col">Designation</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for product in products %}
+            <tr>
+                <th scope="row">{{product.id}}</th>
+                <td> 
+                    <img src=" {{ asset('img/' ~ product.image)}} " alt="{{product.image}}" class="img-fluid" width="80px">
+                </td>
+                <td>{{product.designation}}</td>
+                <td>{{ product.price 
+                        | format_currency('EUR' , locale ='fr') 
+                        | replace({',00': ''})
+                    }} 
+                </td>
+                <td>{{product.quantity}}</td>
+                <td>
+                    <a href=" {{ url('admin.product.delete', {id : product.id}) }} " class ="btn btn-danger" ><i class="bi bi-trash3"></i> Delete 
+                    </a> 
+                    <a href=" {{ url('admin.product.update', {id : product.id}) }} " class ="btn btn-warning"><i class="bi bi-pencil-square"></i> Edit</a> 
+                </td>
+            </tr>
+            {% endfor %}
+            
+          </tbody>
+        </table>
+
+
+{% endblock %}

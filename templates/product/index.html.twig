@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col p-3">
+            <h3>Produit list</h3>
+        </div>
+    </div>
+    <div class="row">
+            {% for product in products %}
+                <div class="col-3 card ">
+                    <img src=" {{ asset('img/' ~ product.image)}} " alt="product" class="img-fluid" width="140px">
+                    <h4 > {{ product.designation }} </h4>
+                    <p> Price :  
+                        {{ product.price 
+                            | format_currency('EUR' , locale ='fr') 
+                            | replace({',00': ''})
+                        }} 
+                     </p>
+                    <p> Quantity :  {{ product.quantity }} </p>
+                    <p>
+                        <a href=" {{ url('product.details', {id : product.id}) }} " class ="btn btn-primary" >Details</a>
+                    </p>
+                </div>
+            {% endfor %}
+    </div>
+{% endblock %}
+

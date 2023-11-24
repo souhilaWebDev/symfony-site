@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+    {% block title %} page hello {% endblock %}
+	{% block body %}
+	   
+        <p>
+     Bonjour {{name}}
+        </p> 
+
+         <p>
+     <a href ="{{ url('homepage.index') }}"> home </a>
+        </p> 
+       
+    {% endblock %}
